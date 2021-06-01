@@ -1,4 +1,4 @@
-package kodlamaio.hrms.core.adapters.abstracts;
+package kodlamaio.hrms.core.validations.abstracts;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import kodlamaio.hrms.entities.concretes.VerificationCode;
 public interface VerificationCodeService {
 	DataResult<List<VerificationCode>> findAll();
 	String generateVerificationCode(User user);
-	VerificationCode findByVerificationCode(String verificationCode);
-		
+	
+
 	
 	
 

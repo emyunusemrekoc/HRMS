@@ -1,4 +1,4 @@
-package kodlamaio.hrms.core.adapters.abstracts;
+package kodlamaio.hrms.core.validations.abstracts;
 
 public interface RegexService {
 	

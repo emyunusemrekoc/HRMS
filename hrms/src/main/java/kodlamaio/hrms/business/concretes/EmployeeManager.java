@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstracts.EmployeeService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
 import kodlamaio.hrms.entities.concretes.Employee;
 @Service
@@ -23,15 +24,15 @@ public class EmployeeManager implements EmployeeService{
 	}
 
 	@Override
-	public DataResult<List<Employee>> getAll() {
+	public DataResult<List<Employee>> findAll() {
 		
 		return new SuccessDataResult<List<Employee>>(this.employeeDao.findAll(),"Çalışanlar listelendi.");
 	}
 
 	@Override
 	public Result add(Employee employee) {
-		// TODO Auto-generated method stub
-		return null;
+		this.employeeDao.save(employee);
+		return new SuccessResult("Çalışan sisteme başarılı bir şekilde kaydedildi");
 	}
 
 }

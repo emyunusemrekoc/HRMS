@@ -1,11 +1,11 @@
-package kodlamaio.hrms.core.adapters.concretes;
+package kodlamaio.hrms.core.validations.concretes;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.core.adapters.abstracts.RegexService;
+import kodlamaio.hrms.core.validations.abstracts.RegexService;
 
 @Service
 public class RegexManager implements RegexService {

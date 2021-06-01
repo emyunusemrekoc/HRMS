@@ -11,5 +11,7 @@ public interface JobTitleDao  extends JpaRepository<JobTitle, Integer>{
 	
 	List<JobTitle> findAllByTitle(String title);
 	
+	boolean existsByTitle(String title);
+	
 
 }
