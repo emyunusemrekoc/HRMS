@@ -1,4 +1,4 @@
-package kodlamaio.hrms.core.validations.abstracts;
+package kodlamaio.hrms.business.validations.abstracts;
 
 import java.util.List;
 

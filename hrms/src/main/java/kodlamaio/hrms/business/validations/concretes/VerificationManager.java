@@ -1,12 +1,14 @@
-package kodlamaio.hrms.core.validations.concretes;
+package kodlamaio.hrms.business.validations.concretes;
+
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.validations.abstracts.VerificationService;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.core.validations.abstracts.VerificationService;
 import kodlamaio.hrms.dataAccess.abstracts.VerificationCodeDao;
 import kodlamaio.hrms.entities.concretes.VerificationCode;
 
@@ -34,7 +36,9 @@ public class VerificationManager implements VerificationService{
 
 			VerificationCode code = verificationCodeDao.findByVerificationCode(verificationCode);
 			code.setVerified(true);
+			code.setVerifiedDate(LocalDateTime.now());
 			verificationCodeDao.save(code);
+			
 			
 			
 			

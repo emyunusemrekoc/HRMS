@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.ConfirmByEmployeeDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
-import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.ConfirmByEmployee;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.Employer;
@@ -21,28 +21,25 @@ public class ConfirmByEmployeeManager implements ConfirmByEmployeeService {
 
 	private ConfirmByEmployeeDao confirmByEmployeeDao;
 	private EmployeeDao employeeDao;
-	private EmployerDao employerDao;
+	
 	
 	@Autowired
-	public ConfirmByEmployeeManager(ConfirmByEmployeeDao confirmByEmployeeDao, EmployeeDao employeeDao,EmployerDao employerDao) {
+	public ConfirmByEmployeeManager(ConfirmByEmployeeDao confirmByEmployeeDao,EmployeeDao employeeDao) {
 		super();
 		this.confirmByEmployeeDao = confirmByEmployeeDao;
 		this.employeeDao = employeeDao;
-		this.employerDao = employerDao;
-	}
-
+		}
+	
 	@Override
-	public Result isConfirmedByEmployee(Employer employer,Employee employee) {
-		
-		this.employeeDao.findAll();
-		this.employerDao.findAll();
-		
-		
-//		ConfirmByEmployee confirmByEmployee = new ConfirmByEmployee();
-//		confirmByEmployee.setConfirmed(true);
-//		confirmByEmployee.getEmployer();
-//		confirmByEmployee.getEmployee();
-//		confirmByEmployeeDao.save(confirmByEmployee);
+	public Result isConfirmedByEmployee(int employerId,int employeeId,boolean isConfirmed) {
+			Employee employee = employeeDao.findById(employeeId);
+			//confirmTableSetter(employerId);
+			ConfirmByEmployee confirmByEmployee = this.confirmByEmployeeDao.findByEmployerId(employerId);
+			confirmByEmployee.setEmployee(employee);
+			confirmByEmployee.setConfirmed(isConfirmed);
+			confirmByEmployee.setConfirmedDate(LocalDateTime.now());
+			this.confirmByEmployeeDao.save(confirmByEmployee);
+			
 		
 		return new SuccessResult("İşveren başarılı bir şekilde onaylandı");
 		
@@ -53,5 +50,16 @@ public class ConfirmByEmployeeManager implements ConfirmByEmployeeService {
 		
 		return new SuccessDataResult<List<ConfirmByEmployee>>(confirmByEmployeeDao.findAll(),"İşveren onayları listelendi");
 	}
+
+	@Override
+	public void confirmTableSetter(Employer employer) {
+		
+		ConfirmByEmployee confirmByEmployee = new ConfirmByEmployee();
+		confirmByEmployee.setEmployer(employer);
+		confirmByEmployee.setConfirmed(false);
+		this.confirmByEmployeeDao.save(confirmByEmployee);
+	}
+
+	
 
 }

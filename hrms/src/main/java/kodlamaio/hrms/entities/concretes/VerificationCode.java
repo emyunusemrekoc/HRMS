@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,6 +33,10 @@ public class VerificationCode {
 	
 	@Column(name="is_verified")
 	private boolean isVerified;
+	
+	@JsonIgnore
+	@Column(name="verified_date")
+	private LocalDateTime verifiedDate;
 	
 	@OneToOne()
 	@JoinColumn(name ="user_id",referencedColumnName = "id")

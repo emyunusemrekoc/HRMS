@@ -5,15 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.ConfirmByEmployeeService;
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.business.validations.abstracts.VerificationCodeService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
+import kodlamaio.hrms.core.utilities.regex.abstracts.RegexService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.core.validations.abstracts.RegexService;
-import kodlamaio.hrms.core.validations.abstracts.VerificationCodeService;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 @Service
@@ -23,15 +24,17 @@ public class EmployerManager implements EmployerService{
 	private VerificationCodeService verificationCodeService;
 	private RegexService regexService;
 	private FakeSendEmailService fakeSendEmailService;
+	private ConfirmByEmployeeService confirmByEmployeeService;
 
 	@Autowired
 	public EmployerManager(EmployerDao employerDao,VerificationCodeService verificationCodeService,
-			RegexService regexService,FakeSendEmailService fakeSendEmailService) {
+			RegexService regexService,FakeSendEmailService fakeSendEmailService,ConfirmByEmployeeService confirmByEmployeeService) {
 		super();
 		this.employerDao = employerDao;
 		this.verificationCodeService = verificationCodeService;
 		this.regexService = regexService;
 		this.fakeSendEmailService = fakeSendEmailService;
+		this.confirmByEmployeeService = confirmByEmployeeService;
 	}
 
 	@Override
@@ -57,6 +60,9 @@ public class EmployerManager implements EmployerService{
 		else if (!regexService.isPasswordFormat(employer.getPassword())) {
 			return new ErrorResult(
 					"Şifreniz en az 8 karakterden oluşmalıdır.En az bir büyük harf,bir küçük harf,bir rakam ve özel karakter içermelidir.");
+		}
+		else if (!employer.getPassword().equals(employer.getPasswordRepeat())) {
+			return new ErrorResult("Şifreler birbiri ile uyumsuz");
 		}
 		else if (!regexService.isPhoneNumberFormat(employer.getPhoneNumber())) {
 			return new ErrorResult(
@@ -89,16 +95,14 @@ public class EmployerManager implements EmployerService{
 			this.employerDao.save(employer);
 			this.verificationCodeService.generateVerificationCode(employer);
 			this.fakeSendEmailService.SendEmail(employer.getEmail());
+			this.confirmByEmployeeService.confirmTableSetter(employer);
+		
 			return new SuccessResult("Kullanıcı sisteme kaydedildi.Fakat mail doğrulaması yapılmadı. " + employer.getEmail()
 			+ " Adresine doğrulama kodu gönderildi");
 		}
 	}
 
-	@Override
-	public Result confirm(Employer employer) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }
 	
 

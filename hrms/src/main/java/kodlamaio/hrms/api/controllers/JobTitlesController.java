@@ -15,7 +15,7 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobTitle;
 
 @RestController
-@RequestMapping("/api/jobtitle")
+@RequestMapping("/api/jobTitles")
 public class JobTitlesController {
 	
 	private JobTitleService jobTitleService;

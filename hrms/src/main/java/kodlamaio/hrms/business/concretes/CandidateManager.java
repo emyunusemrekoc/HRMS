@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.validations.abstracts.VerificationCodeService;
+import kodlamaio.hrms.business.validations.abstracts.VerificationService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeMernisService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
+import kodlamaio.hrms.core.utilities.regex.abstracts.RegexService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.core.validations.abstracts.RegexService;
-import kodlamaio.hrms.core.validations.abstracts.VerificationCodeService;
-import kodlamaio.hrms.core.validations.abstracts.VerificationService;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 import kodlamaio.hrms.dataAccess.abstracts.VerificationCodeDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
@@ -65,7 +65,9 @@ public class CandidateManager implements CandidateService {
 			return new ErrorResult(
 					"Şifreniz en az 8 karakterden oluşmalıdır.En az bir büyük harf,bir küçük harf,bir rakam ve özel karakter içermelidir.");
 		}
-
+		else if (!candidate.getPassword().equals(candidate.getPasswordRepeat())) {
+			return new ErrorResult("Şifreler birbiri ile uyumsuz");
+		}
 		else if (!regexService.isDateOfBirthFormat(candidate.getDateOfBirth())) {
 			return new ErrorResult("Lütfen doğum tarihinizi GG-AA-YYYY formatında giriniz.");
 		}
@@ -86,6 +88,8 @@ public class CandidateManager implements CandidateService {
 		else if (candidateDao.findByIdentificationNumberEquals(candidate.getIdentificationNumber()) != null) {
 			return new ErrorResult("Bu kimlik numarası daha önceden kayıtlı");
 		} 
+		
+		
 		else {
 			this.candidateDao.save(candidate);
 			this.verificationCodeService.generateVerificationCode(candidate);

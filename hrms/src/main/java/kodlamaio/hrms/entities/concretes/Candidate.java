@@ -30,4 +30,5 @@ public class Candidate extends User{
 	
 	@Column(name="date_of_birth")
 	private String dateOfBirth; // değişicek importu
+	
 }
