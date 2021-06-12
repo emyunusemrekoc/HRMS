@@ -1,11 +1,11 @@
-package kodlamaio.hrms.business.validations.concretes;
+package kodlamaio.hrms.business.verifications.concretes;
 
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.business.validations.abstracts.VerificationService;
+import kodlamaio.hrms.business.verifications.abstracts.VerificationService;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;

@@ -8,4 +8,6 @@ public interface DtoConverterService {
 	
 	<T> Object dtoToEntity(Object dtoClass,Class<T> targetEntityClass);
 
+	//<T> Object dtoToEntitySingle(Class<T> dtoClass,Class<T> targetEntityClass);
+
 }

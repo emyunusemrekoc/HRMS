@@ -2,6 +2,7 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import kodlamaio.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +21,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Employer extends User {
 
 	
@@ -37,9 +40,9 @@ public class Employer extends User {
 //	@JsonIgnore
 //	@OneToOne(mappedBy = "employer")
 //	private ConfirmByEmployee confirmByEmployee;
-//	
+
 	@JsonIgnore
-	@OneToMany(mappedBy = "employer")
+	@OneToMany(mappedBy = "employer",cascade = CascadeType.ALL)
 	private List<JobPosting> jobPostings;
 	
 	

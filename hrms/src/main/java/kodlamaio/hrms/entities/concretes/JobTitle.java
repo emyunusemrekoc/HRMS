@@ -16,17 +16,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity // bu classin bir entity olduğunu belirtir.
-@Data // getter setter oluşturur
-@Table(name="job_titles") // sql tablosuyla eşleştirir
-@AllArgsConstructor // bizim yerimize constructor oluşturur 
-@NoArgsConstructor // içi boş constructorları oluşturur
+@Entity 
+@Data 
+@Table(name="job_titles") 
+@AllArgsConstructor 
+@NoArgsConstructor 
 public class JobTitle {
 	
-	@Id // jobtitles primary keyi id dir demek. veritabanınındaki idyi belirtir.
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // idyi nasıl artıracağımızı belirtiyoruz
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	
-	@Column(name="id") // sql ile tabloları eşleştirir.
+	@Column(name="id") 
 	private int id;
 	
 	@Column(name="title")

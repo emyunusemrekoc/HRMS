@@ -13,7 +13,7 @@ public interface JobPostingService {
 	
 	Result add(JobPostingAddDto jobPostingAddDto);
 	Result delete(int id);
-	Result isActive(int id,boolean isActive);
+	Result isActive(int id,int employerId,boolean isActive);
 	DataResult<List<JobPostingDto>> findAllByIsActive(boolean isActive);
 	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc(boolean isActive);
 	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(boolean isActive);

@@ -86,8 +86,8 @@ public class JobPostingManager implements JobPostingService {
 	}
 	
 	@Override
-	public Result isActive(int id,boolean isActive) {
-		JobPosting posting = jobPostingDao.findById(id);
+	public Result isActive(int id,int employerId,boolean isActive) {
+		JobPosting posting = jobPostingDao.findByIdAndEmployerId(id, employerId);
 		if(!posting.isActive() && isActive) {
 		
 		

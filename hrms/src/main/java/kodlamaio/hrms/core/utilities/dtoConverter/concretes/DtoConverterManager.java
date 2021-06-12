@@ -31,5 +31,10 @@ public class DtoConverterManager implements DtoConverterService{
 	public <T> Object dtoToEntity(Object dtoClass, Class<T> targetEntityClass) {
 		return modelMapper.map(dtoClass,targetEntityClass);
 	}
-
+	
+//	@Override
+//	public <T> Object dtoToEntitySingle(Class<T> dtoClass,Class<T> targetEntityClass) {
+//		return modelMapper.map(dtoClass,targetEntityClass);
+//	}
+	
 }

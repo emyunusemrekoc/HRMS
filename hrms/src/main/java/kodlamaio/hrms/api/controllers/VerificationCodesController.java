@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.hrms.business.validations.abstracts.VerificationService;
+import kodlamaio.hrms.business.verifications.abstracts.VerificationService;
 import kodlamaio.hrms.core.utilities.results.Result;
 
 @RestController

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ConfirmByEmployeeService;
 import kodlamaio.hrms.business.abstracts.EmployerService;
-import kodlamaio.hrms.business.validations.abstracts.VerificationCodeService;
+import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
 import kodlamaio.hrms.core.utilities.regex.abstracts.RegexService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
@@ -48,7 +48,7 @@ public class EmployerManager implements EmployerService{
 		
 		String[] emailSplit = employer.getEmail().split("@");
 		
-		if (employer.getPhoneNumber().isEmpty() || employer.getEmail().isEmpty() || employer.getPassword().isEmpty()
+		if ( employer.getEmail().isEmpty() || employer.getPassword().isEmpty()
 				||employer.getCompanyName().isEmpty() || employer.getWebAdress().isEmpty() ||
 				employer.getCompanyName().isBlank() || employer.getWebAdress().isBlank() || 
 				employer.getPhoneNumber().isEmpty() || employer.getPhoneNumber().isBlank() )
@@ -101,6 +101,8 @@ public class EmployerManager implements EmployerService{
 			+ " Adresine doğrulama kodu gönderildi");
 		}
 	}
+	
+	
 
 
 }

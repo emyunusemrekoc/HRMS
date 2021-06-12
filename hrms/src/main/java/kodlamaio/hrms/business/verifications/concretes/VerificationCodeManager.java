@@ -1,4 +1,4 @@
-package kodlamaio.hrms.business.validations.concretes;
+package kodlamaio.hrms.business.verifications.concretes;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.business.validations.abstracts.VerificationCodeService;
+import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
+import kodlamaio.hrms.core.entities.User;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.VerificationCodeDao;
-import kodlamaio.hrms.entities.concretes.User;
 import kodlamaio.hrms.entities.concretes.VerificationCode;
 
 @Service

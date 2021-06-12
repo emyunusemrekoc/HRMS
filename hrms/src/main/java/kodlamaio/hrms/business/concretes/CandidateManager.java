@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
-import kodlamaio.hrms.business.validations.abstracts.VerificationCodeService;
-import kodlamaio.hrms.business.validations.abstracts.VerificationService;
+import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeMernisService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
 import kodlamaio.hrms.core.utilities.regex.abstracts.RegexService;
@@ -17,7 +16,6 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
-import kodlamaio.hrms.dataAccess.abstracts.VerificationCodeDao;
 import kodlamaio.hrms.entities.concretes.Candidate;
 
 @Service
@@ -61,7 +59,7 @@ public class CandidateManager implements CandidateService {
 			return new ErrorResult("Boş alan bırakmayınız");
 		}
 
-		else if (!regexService.isPasswordFormat(candidate.getPassword())) {
+		 if (!regexService.isPasswordFormat(candidate.getPassword())) {
 			return new ErrorResult(
 					"Şifreniz en az 8 karakterden oluşmalıdır.En az bir büyük harf,bir küçük harf,bir rakam ve özel karakter içermelidir.");
 		}
