@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -30,6 +32,6 @@ public class Candidate extends User{
 	private String identificationNumber;
 	
 	@Column(name="date_of_birth")
-	private String dateOfBirth; // değişicek importu
+	private Date dateOfBirth; 
 	
 }

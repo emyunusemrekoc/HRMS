@@ -46,9 +46,7 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="photo_url")
-	private String photoUrl;
-	
+
 	@Transient
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String passwordRepeat;

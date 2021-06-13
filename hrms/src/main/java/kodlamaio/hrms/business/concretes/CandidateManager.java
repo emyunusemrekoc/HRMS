@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.CandidateService;
+import kodlamaio.hrms.business.abstracts.UserPhotoService;
 import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeMernisService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
@@ -26,19 +27,20 @@ public class CandidateManager implements CandidateService {
 	private VerificationCodeService verificationCodeService;
 	private RegexService regexService;
 	private FakeSendEmailService fakeSendEmailService;
+	private UserPhotoService userPhotoService;
 
 
 	@Autowired
 	public CandidateManager(FakeMernisService fakeMernisService, CandidateDao candidateDao,
 			VerificationCodeService verificationCodeService, RegexService regexService,
-			FakeSendEmailService fakeSendEmailService) {
+			FakeSendEmailService fakeSendEmailService,UserPhotoService userPhotoService) {
 		super();
 		this.fakeMernisService = fakeMernisService;
 		this.candidateDao = candidateDao;
 		this.verificationCodeService = verificationCodeService;
 		this.regexService = regexService;
 		this.fakeSendEmailService = fakeSendEmailService;
-		
+		this.userPhotoService = userPhotoService;
 	}
 
 
@@ -52,7 +54,7 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public Result add(Candidate candidate) {
 		if (candidate.getFirstName().isEmpty() || candidate.getLastName().isEmpty()
-				|| candidate.getIdentificationNumber().isEmpty() || candidate.getDateOfBirth().isEmpty()
+				|| candidate.getIdentificationNumber().isEmpty() || candidate.getDateOfBirth()==null
 				|| candidate.getEmail().isEmpty() || candidate.getPassword().isEmpty() || 
 				candidate.getFirstName().isBlank() || candidate.getLastName().isBlank()) {
 			
@@ -65,9 +67,6 @@ public class CandidateManager implements CandidateService {
 		}
 		else if (!candidate.getPassword().equals(candidate.getPasswordRepeat())) {
 			return new ErrorResult("Şifreler birbiri ile uyumsuz");
-		}
-		else if (!regexService.isDateOfBirthFormat(candidate.getDateOfBirth())) {
-			return new ErrorResult("Lütfen doğum tarihinizi GG-AA-YYYY formatında giriniz.");
 		}
 		
 		else if (!regexService.isEmailValid(candidate.getEmail())) {
@@ -92,6 +91,7 @@ public class CandidateManager implements CandidateService {
 			this.candidateDao.save(candidate);
 			this.verificationCodeService.generateVerificationCode(candidate);
 			this.fakeSendEmailService.SendEmail(candidate.getEmail());
+			this.userPhotoService.photoTableSetter(candidate);
 			
 			
 			return new SuccessResult("Kullanıcı sisteme kaydedildi.Fakat doğrulama yapılmadı. " + candidate.getEmail()
