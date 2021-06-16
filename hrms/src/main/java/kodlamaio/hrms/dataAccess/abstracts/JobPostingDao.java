@@ -10,6 +10,7 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer>{
 	
 	JobPosting findById(int id);
 	JobPosting findByIdAndEmployerId(int id,int employerId);
+	
 	List<JobPosting> findAllByIsActive(boolean isActive);
 	List<JobPosting> findAllByIsActiveOrderByCreatedDateDesc(boolean isActive);
 	List<JobPosting> findAllByIsActiveOrderByCreatedDateAsc(boolean isActive);

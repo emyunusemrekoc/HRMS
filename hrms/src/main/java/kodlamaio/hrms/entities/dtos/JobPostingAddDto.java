@@ -26,6 +26,7 @@ public class JobPostingAddDto {
 	private LocalDate applicationDeadline;
 	@JsonIgnore
 	private LocalDate createdDate;
+	@JsonIgnore
 	private boolean isActive;
 	private boolean isRemote;
 	private String jobPostingName;

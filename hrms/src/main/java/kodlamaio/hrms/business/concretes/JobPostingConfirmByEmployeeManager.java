@@ -14,11 +14,10 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobPostingConfirmByEmployeeDao;
+import kodlamaio.hrms.dataAccess.abstracts.JobPostingDao;
 import kodlamaio.hrms.entities.concretes.Employee;
-import kodlamaio.hrms.entities.concretes.EmployerConfirmByEmployee;
 import kodlamaio.hrms.entities.concretes.JobPosting;
 import kodlamaio.hrms.entities.concretes.JobPostingConfirmByEmployee;
-import kodlamaio.hrms.entities.dtos.EmployerConfirmByEmployeeGetDto;
 import kodlamaio.hrms.entities.dtos.JobPostingConfirmByEmployeeGetDto;
 @Service
 public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEmployeeService{
@@ -26,14 +25,16 @@ public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEm
 	private JobPostingConfirmByEmployeeDao jobPostingConfirmByEmployeeDao;
 	private EmployeeDao employeeDao;
 	private DtoConverterService dtoConverterService;
+	private JobPostingDao jobPostingDao;
 	
 	@Autowired
 	public JobPostingConfirmByEmployeeManager(JobPostingConfirmByEmployeeDao jobPostingConfirmByEmployeeDao,
-			EmployeeDao employeeDao, DtoConverterService dtoConverterService) {
+			EmployeeDao employeeDao, DtoConverterService dtoConverterService,JobPostingDao jobPostingDao) {
 		super();
 		this.jobPostingConfirmByEmployeeDao = jobPostingConfirmByEmployeeDao;
 		this.employeeDao = employeeDao;
 		this.dtoConverterService = dtoConverterService;
+		this.jobPostingDao = jobPostingDao;
 	}
 	
 	
@@ -46,6 +47,13 @@ public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEm
 		confirmByEmployee.setConfirmed(isConfirmed);
 		confirmByEmployee.setConfirmedDate(LocalDateTime.now());
 		jobPostingConfirmByEmployeeDao.save(confirmByEmployee);
+		
+		
+		JobPosting pasivePosting = jobPostingDao.findById(jobPostingId);
+		pasivePosting.setActive(isConfirmed);
+		jobPostingDao.save(pasivePosting);
+			
+	
 		
 	
 	return new SuccessResult("İşveren başarılı bir şekilde onaylandı");

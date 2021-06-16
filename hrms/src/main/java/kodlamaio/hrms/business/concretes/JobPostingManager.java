@@ -45,6 +45,7 @@ public class JobPostingManager implements JobPostingService {
 		jobPostingAddDto.setCreatedDate(LocalDate.now());
 		JobPosting jobPosting = (JobPosting) dtoConverterService.dtoToEntity(jobPostingAddDto,JobPosting.class);
 		jobPosting.setId(jobPostingAddDto.getId());
+		jobPosting.setActive(false);
 		
 		jobPostingDao.save( jobPosting);
 		jobPostingConfirmByEmployeeService.confirmTableSetter(jobPosting);
@@ -101,23 +102,25 @@ public class JobPostingManager implements JobPostingService {
 	@Override
 	public Result isActive(int id,int employerId,boolean isActive) {
 		JobPosting posting = jobPostingDao.findByIdAndEmployerId(id, employerId);
-		if(!posting.isActive() && isActive) {
-		
-		
-		posting.setActive(true);
-		this.jobPostingDao.save(posting);
-		
-		return new SuccessResult("İlan aktif duruma getirildi");
-		}else if(posting.isActive() && !isActive) {
+//		if(!posting.isActive() && isActive) {
+//		
+//		
+//		posting.setActive(true);
+//		this.jobPostingDao.save(posting);
+//		
+//		return new SuccessResult("İlan aktif duruma getirildi");
+//		}
+//		else if(posting.isActive() && isActive) {
+//		return new ErrorResult("İlan zaten aktif");
+//	}
+	 	if(posting.isActive() && !isActive) {
 			
 		posting.setActive(false);
 		this.jobPostingDao.save(posting);
 		
 		return new SuccessResult("İlan pasif duruma getirildi"); 
 	}
-		else if(posting.isActive() && isActive) {
-			return new ErrorResult("İlan zaten aktif");
-		}
+
 		else if(!posting.isActive() && !isActive) {
 			return new ErrorResult("İlan zaten pasif");
 		}
@@ -127,6 +130,10 @@ public class JobPostingManager implements JobPostingService {
 			return new ErrorResult("Null değer girdiniz");
 		}
 	}
+
+
+
+
 
 
 
