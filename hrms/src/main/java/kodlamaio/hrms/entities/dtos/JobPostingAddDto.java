@@ -1,6 +1,6 @@
 package kodlamaio.hrms.entities.dtos;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,8 +22,12 @@ public class JobPostingAddDto {
 	private int minSalary;
 	private int maxSalary;
 	private int numberOfOpenPosition;
-	private LocalDateTime applicationDeadline;
+	private LocalDate applicationDeadline;
+	@JsonIgnore
+	private LocalDate createdDate;
 	private boolean isActive;
 	private String jobPostingName;
+	
+
 
 }

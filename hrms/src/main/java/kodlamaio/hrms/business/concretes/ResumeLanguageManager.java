@@ -14,7 +14,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.ResumeLanguageDao;
 import kodlamaio.hrms.entities.concretes.ResumeLanguage;
 import kodlamaio.hrms.entities.dtos.ResumeLanguageDto;
-import kodlamaio.hrms.entities.dtos.ResumeSkillDto;
 @Service
 public class ResumeLanguageManager implements ResumeLanguageService{
 
@@ -41,4 +40,12 @@ public class ResumeLanguageManager implements ResumeLanguageService{
 		return new SuccessDataResult<List<ResumeLanguageDto>>(dtoConverterService.entityToDto(resumeLanguageDao.findAllByResumeId(resumeId),ResumeLanguageDto.class),"Diller listelendi");
 	}
 
+	
+	@Override
+	public Result addAll(List<ResumeLanguage> resumeLanguage) {
+		resumeLanguageDao.saveAll(resumeLanguage);
+			return new SuccessResult("Diller eklendi");
+	}
+
 }
+

@@ -31,9 +31,6 @@ public class ResumeSkillManager implements ResumeSkillService {
 
 	@Override
 	public Result add(ResumeSkillDto resumeSkillDto) {
-
-	
-		//resumeSkillDao.save(resumeSkill);
 		
 		resumeSkillDao.save((ResumeSkill) dtoConverterService.dtoToEntity(resumeSkillDto, ResumeSkill.class));
 		
@@ -44,6 +41,12 @@ public class ResumeSkillManager implements ResumeSkillService {
 	public DataResult<List<ResumeSkillDto>> findAllByResumeId(int resumeId) {
 		
 		return new SuccessDataResult<List<ResumeSkillDto>>(dtoConverterService.entityToDto(resumeSkillDao.findAllByResumeId(resumeId),ResumeSkillDto.class),"Yetenekler listelendi");
+	}
+
+	@Override
+	public Result addAll(List<ResumeSkill> resumeSkills) {
+		resumeSkillDao.saveAll(resumeSkills);
+		return new SuccessResult("Yetenekler eklendi");
 	}
 
 	

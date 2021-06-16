@@ -51,4 +51,10 @@ public class ResumeEducationManager implements ResumeEducationService{
 		return new SuccessDataResult<List<ResumeEducationDto>>(dtoConverterService.entityToDto(resumeEducationDao.findAllByResumeIdOrderByEndDateDesc(resumeId),ResumeEducationDto.class),"Eğitimler mezuniyet yılına göre listelendi");
 	}
 
+	@Override
+	public Result addAll(List<ResumeEducation> resumeEducations) {
+		resumeEducationDao.saveAll(resumeEducations);
+		return new SuccessResult("Eğitim bilgileri eklendi");
+	}
+
 }

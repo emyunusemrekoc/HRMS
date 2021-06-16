@@ -13,10 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResumeExperienceDto {
 	
-	@JsonIgnore
+	
 	private int id;
-	private int resumeId;
-	private int jobTitleId;
+	//private int resumeId;
+	private String jobTitleTitle;
 	private String companyName;
 	private Date startedDate;
 	private Date endDate;

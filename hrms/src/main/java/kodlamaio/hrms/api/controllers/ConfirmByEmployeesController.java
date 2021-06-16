@@ -12,6 +12,7 @@ import kodlamaio.hrms.business.abstracts.ConfirmByEmployeeService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.ConfirmByEmployee;
+import kodlamaio.hrms.entities.dtos.ConfirmByEmployeeGetDto;
 
 @RestController
 @RequestMapping("/api/confirmByEmployees")
@@ -30,8 +31,16 @@ public class ConfirmByEmployeesController {
 		return confirmByEmployeeService.findAll();
 	}
 	
+	@GetMapping("/findAllByIsConfirmed")
+	public DataResult<List<ConfirmByEmployeeGetDto>> findAllByIsConfirmed(boolean isConfirmed){
+	
+		return confirmByEmployeeService.findAllByIsConfirmed(isConfirmed);
+	}
+	
 	@PostMapping("/isConfirmedByEmployee")
 	public Result isConfirmedByEmployee(int employerId, int employeeId,boolean isConfirmed) {
+		
 		return confirmByEmployeeService.isConfirmedByEmployee(employerId, employeeId, isConfirmed);
 	}
+	
 }

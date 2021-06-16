@@ -2,7 +2,10 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +16,11 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
+
+
 @RestController
 @RequestMapping("/api/employers")
+@CrossOrigin
 public class EmployersController {
 	
 
@@ -26,14 +32,17 @@ public class EmployersController {
 			this.employerService = employerService;
 		}
 
+
+		@PostMapping("/add")
+		public Result Add(@RequestBody @Valid Employer employer) {
+			
+			return employerService.add(employer);
+		}
+		
 		@GetMapping("/findAll")
 		public DataResult<List<Employer>> findAll() {
 			return employerService.findAll();
 		}
 
-		@PostMapping("/add")
-		public Result Add(@RequestBody Employer employer) {
-			return employerService.add(employer);
-		}
 		
 }

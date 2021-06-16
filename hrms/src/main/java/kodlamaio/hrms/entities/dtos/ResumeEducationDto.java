@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResumeEducationDto {
-	@JsonIgnore
+	
+	
 	private int id;
-	private int resumeId;
-	private int degreeId;
+	//private int resumeId;
+	private String degreeEduDegree;
 	private String schoolName;
 	private String schoolDepartment;
 	private Date startedDate;

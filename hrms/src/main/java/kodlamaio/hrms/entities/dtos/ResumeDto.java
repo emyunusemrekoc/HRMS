@@ -3,8 +3,7 @@ package kodlamaio.hrms.entities.dtos;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -21,14 +20,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResumeGetDto {
+public class ResumeDto {
 	
-	@JsonIgnore
+	
 	private int id;
 	private int candidateId;
 	private String about;
+	@NotBlank(message = "Özgeçmiş ismi boş bırakılamaz")
 	private String resumeName;
+	@JsonIgnore
 	private LocalDateTime createdDate;
+	@JsonIgnore
 	private LocalDateTime updatedDate;
 	private List<ResumeLanguage> languages;
 	private List<ResumeSkill> skills;

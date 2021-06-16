@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class JobPostingManager implements JobPostingService {
 
 	@Override
 	public Result add(JobPostingAddDto jobPostingAddDto) {
+		
+		jobPostingAddDto.setCreatedDate(LocalDate.now());
 		this.jobPostingDao.save( (JobPosting) dtoConverterService.dtoToEntity(jobPostingAddDto,JobPosting.class));
 		return new SuccessResult("İş ilanı başarılı bir şekilde oluşturuldu");
 	}
@@ -52,14 +55,14 @@ public class JobPostingManager implements JobPostingService {
 	}
 	
 	@Override
-	public DataResult<List<JobPostingDto>> findAllByIsActive(boolean isActive) {
+	public DataResult<List<JobPostingDto>> findAllByIsActive() {
 		
 		return new SuccessDataResult<List<JobPostingDto>>(dtoConverterService.entityToDto(jobPostingDao.findAllByIsActive(true),JobPostingDto.class)
 				,"Aktif olan tüm ilanlar(Firma adı, açık pozisyon sayısı, yayın tarihi, son başvuru tarihi) listelendi");
 	}
 
 	@Override
-	public DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc(boolean isActive) {
+	public DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc() {
 		
 		return new SuccessDataResult<List<JobPostingDto>>(dtoConverterService.entityToDto(jobPostingDao.findAllByIsActiveOrderByCreatedDateDesc(true),JobPostingDto.class)
 				,"Aktif olan tüm ilanlar(Firma adı, açık pozisyon sayısı, yayın tarihi, son başvuru tarihi) tarih(Yeniden Eskiye)  göre listelendi");
@@ -67,15 +70,15 @@ public class JobPostingManager implements JobPostingService {
 
 
 	@Override
-	public DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(boolean isActive) {
+	public DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc() {
 		return new SuccessDataResult<List<JobPostingDto>>(dtoConverterService.entityToDto(jobPostingDao.findAllByIsActiveOrderByCreatedDateAsc(true),JobPostingDto.class)
 				,"Aktif olan tüm ilanlar(Firma adı, açık pozisyon sayısı, yayın tarihi, son başvuru tarihi) tarihe(Eskiden Yeniye) göre listelendi");
 	}
 	
 	@Override
-	public DataResult<List<JobPostingDto>> findAllByIsActiveAndEmployer_CompanyName(boolean isActive,String employerName) {
+	public DataResult<List<JobPostingDto>> findAllByIsActiveAndEmployer_CompanyName(String companyName) {
 		
-		return new SuccessDataResult<List<JobPostingDto>>(dtoConverterService.entityToDto(jobPostingDao.findAllByIsActiveAndEmployer_CompanyName(true,employerName),JobPostingDto.class)
+		return new SuccessDataResult<List<JobPostingDto>>(dtoConverterService.entityToDto(jobPostingDao.findAllByIsActiveAndEmployer_CompanyName(true,companyName),JobPostingDto.class)
 				,"Firmanın aktif olan tüm ilanları(Firma adı, açık pozisyon sayısı, yayın tarihi, son başvuru tarihi)  listelendi");
 	}
 

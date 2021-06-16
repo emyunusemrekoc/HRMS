@@ -9,5 +9,6 @@ import kodlamaio.hrms.entities.dtos.ResumeEduDegreeDto;
 public interface ResumeEduDegreeService {
 	Result add(ResumeEduDegreeDto resumeEduDegreeDto);
 	DataResult<List<ResumeEduDegreeDto>> findAll();
+	
 
 }

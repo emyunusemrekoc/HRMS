@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import kodlamaio.hrms.entities.dtos.JobPostingDto;
 
 @RestController
 @RequestMapping("/api/jobPostings")
+@CrossOrigin
 public class JobPostingsController {
 
 	private JobPostingService jobPostingService;
@@ -49,24 +51,24 @@ public class JobPostingsController {
 	}
 
 	@GetMapping("/findAllByIsActive")
-	DataResult<List<JobPostingDto>> findAllByIsActive(boolean isActive) {
-		return this.jobPostingService.findAllByIsActive(true);
+	DataResult<List<JobPostingDto>> findAllByIsActive() {
+		return this.jobPostingService.findAllByIsActive();
 
 	}
 
 	@GetMapping("/findAllByIsActiveOrderByCreatedDateDesc")
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc(boolean isActive) {
-		return this.jobPostingService.findAllByIsActiveOrderByCreatedDateDesc(true);
+	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc() {
+		return this.jobPostingService.findAllByIsActiveOrderByCreatedDateDesc();
 	}
 	
 	@GetMapping("/findAllByIsActiveOrderByCreatedDateAsc")
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(boolean isActive){
-	return this.jobPostingService.findAllByIsActiveOrderByCreatedDateAsc(true);
+	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(){
+	return this.jobPostingService.findAllByIsActiveOrderByCreatedDateAsc();
 	}
 	
 	@GetMapping("/findAllByIsActiveAndEmployer_CompanyName")
-	DataResult<List<JobPostingDto>> findAllByIsActiveAndEmployer_CompanyName(boolean isActive, String employerName) {
-		return this.jobPostingService.findAllByIsActiveAndEmployer_CompanyName(true, employerName);
+	DataResult<List<JobPostingDto>> findAllByIsActiveAndEmployer_CompanyName(String companyName) {
+		return this.jobPostingService.findAllByIsActiveAndEmployer_CompanyName( companyName);
 	}
 	
 	@GetMapping("/findAll")

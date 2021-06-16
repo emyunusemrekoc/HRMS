@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResumeSkillDto {
 	
-	@JsonIgnore
+	
 	private int id;
-	private int resumeId;
+	//private int resumeId;
 	private String skill;
 
 }

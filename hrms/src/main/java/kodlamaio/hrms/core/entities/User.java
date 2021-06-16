@@ -11,10 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-
-
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +42,6 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-
 	@Transient
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private String passwordRepeat;

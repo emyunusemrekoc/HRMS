@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,12 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.ResumeService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.entities.dtos.ResumeAddDto;
-import kodlamaio.hrms.entities.dtos.ResumeGetDto;
+import kodlamaio.hrms.entities.dtos.ResumeDto;
 import kodlamaio.hrms.entities.dtos.ResumeUpdateDto;
 
 @RestController
 @RequestMapping("/api/resumes")
+@CrossOrigin
 public class ResumesController {
 	
 	private ResumeService resumeService;
@@ -32,8 +33,8 @@ public class ResumesController {
 	}
 
 	@PostMapping("/add")
-	public Result add(@RequestBody @Valid ResumeAddDto resumeAddDto) {
-		return resumeService.add(resumeAddDto);
+	public Result add(@RequestBody @Valid ResumeDto resumeDto) {
+		return resumeService.add(resumeDto);
 	}
 	@PutMapping("/update")
 	Result update(@RequestBody @Valid ResumeUpdateDto resumeUpdateDto,int candidateId,int resumeId) {
@@ -47,12 +48,12 @@ public class ResumesController {
 	}
 	
 	@GetMapping("/findAllByCandidateId")
-	DataResult<List<ResumeGetDto>> findAllByCandidateId(int candidateId){
+	DataResult<List<ResumeDto>> findAllByCandidateId(int candidateId){
 		return resumeService.findAllByCandidateId(candidateId);
 		
 	}
 	@GetMapping("/findAll")
-	DataResult<List<ResumeGetDto>> findAll(){
+	DataResult<List<ResumeDto>> findAll(){
 		return resumeService.findAll();
 		
 	}

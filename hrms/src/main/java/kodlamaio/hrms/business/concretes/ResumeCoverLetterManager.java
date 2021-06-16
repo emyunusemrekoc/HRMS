@@ -41,4 +41,10 @@ public class ResumeCoverLetterManager implements ResumeCoverLetterService{
 		return new SuccessDataResult<List<ResumeCoverLetterDto>>(dtoConverterService.entityToDto(resumeCoverLetterDao.findAllByResumeId(resumeId),ResumeCoverLetterDto.class),"Ön yazılar listelendi");
 	}
 
+	@Override
+	public Result addAll(List<ResumeCoverLetter> resumeCoverLetters) {
+		resumeCoverLetterDao.saveAll(resumeCoverLetters);
+		return new SuccessResult("Önyazı bilgisi eklendi");
+	}
+
 }

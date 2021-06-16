@@ -14,10 +14,10 @@ public interface JobPostingService {
 	Result add(JobPostingAddDto jobPostingAddDto);
 	Result delete(int id);
 	Result isActive(int id,int employerId,boolean isActive);
-	DataResult<List<JobPostingDto>> findAllByIsActive(boolean isActive);
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc(boolean isActive);
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(boolean isActive);
-	DataResult<List<JobPostingDto>>  findAllByIsActiveAndEmployer_CompanyName(boolean isActive, String employerName);
+	DataResult<List<JobPostingDto>> findAllByIsActive();
+	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc();
+	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc();
+	DataResult<List<JobPostingDto>>  findAllByIsActiveAndEmployer_CompanyName(String employerName);
 	DataResult<List<JobPosting>> findAll();
 	
 

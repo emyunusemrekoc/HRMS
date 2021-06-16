@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ConfirmByEmployeeService;
+import kodlamaio.hrms.core.utilities.dtoConverter.abstracts.DtoConverterService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -16,18 +17,22 @@ import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
 import kodlamaio.hrms.entities.concretes.ConfirmByEmployee;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.dtos.ConfirmByEmployeeGetDto;
+import kodlamaio.hrms.entities.dtos.JobPostingDto;
 @Service
 public class ConfirmByEmployeeManager implements ConfirmByEmployeeService {
 
 	private ConfirmByEmployeeDao confirmByEmployeeDao;
 	private EmployeeDao employeeDao;
+	private DtoConverterService dtoConverterService;
 	
 	
 	@Autowired
-	public ConfirmByEmployeeManager(ConfirmByEmployeeDao confirmByEmployeeDao,EmployeeDao employeeDao) {
+	public ConfirmByEmployeeManager(ConfirmByEmployeeDao confirmByEmployeeDao,EmployeeDao employeeDao,DtoConverterService dtoConverterService) {
 		super();
 		this.confirmByEmployeeDao = confirmByEmployeeDao;
 		this.employeeDao = employeeDao;
+		this.dtoConverterService = dtoConverterService;
 		}
 	
 	@Override
@@ -51,6 +56,13 @@ public class ConfirmByEmployeeManager implements ConfirmByEmployeeService {
 		return new SuccessDataResult<List<ConfirmByEmployee>>(confirmByEmployeeDao.findAll(),"İşveren onayları listelendi");
 	}
 
+	@Override
+	public DataResult<List<ConfirmByEmployeeGetDto>> findAllByIsConfirmed(boolean isConfirmed) {
+		
+		return new SuccessDataResult<List<ConfirmByEmployeeGetDto>>(dtoConverterService.entityToDto(confirmByEmployeeDao.findAllByIsConfirmed(isConfirmed),ConfirmByEmployeeGetDto.class)
+				,"Onay listesi oluşturuldu");
+	}
+	
 	@Override
 	public void confirmTableSetter(Employer employer) {
 		
