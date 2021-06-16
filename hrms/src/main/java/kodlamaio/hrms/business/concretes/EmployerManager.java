@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kodlamaio.hrms.business.abstracts.ConfirmByEmployeeService;
+import kodlamaio.hrms.business.abstracts.EmployerConfirmByEmployeeService;
 import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
 import kodlamaio.hrms.core.adapters.abstracts.FakeSendEmailService;
@@ -24,11 +24,11 @@ public class EmployerManager implements EmployerService{
 	private VerificationCodeService verificationCodeService;
 	private RegexService regexService;
 	private FakeSendEmailService fakeSendEmailService;
-	private ConfirmByEmployeeService confirmByEmployeeService;
+	private EmployerConfirmByEmployeeService confirmByEmployeeService;
 
 	@Autowired
 	public EmployerManager(EmployerDao employerDao,VerificationCodeService verificationCodeService,
-			RegexService regexService,FakeSendEmailService fakeSendEmailService,ConfirmByEmployeeService confirmByEmployeeService) {
+			RegexService regexService,FakeSendEmailService fakeSendEmailService,EmployerConfirmByEmployeeService confirmByEmployeeService) {
 		super();
 		this.employerDao = employerDao;
 		this.verificationCodeService = verificationCodeService;

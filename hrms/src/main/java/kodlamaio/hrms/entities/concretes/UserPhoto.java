@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import kodlamaio.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +28,7 @@ public class UserPhoto {
 	@Column(name="id")
 	private int id;
 	
+	@JsonIgnore
 	@OneToOne()
 	@JoinColumn(name="user_id",referencedColumnName = "id")
 	private User user;

@@ -18,7 +18,7 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobPosting;
 import kodlamaio.hrms.entities.dtos.JobPostingAddDto;
-import kodlamaio.hrms.entities.dtos.JobPostingDto;
+import kodlamaio.hrms.entities.dtos.JobPostingGetDto;
 
 @RestController
 @RequestMapping("/api/jobPostings")
@@ -51,23 +51,23 @@ public class JobPostingsController {
 	}
 
 	@GetMapping("/findAllByIsActive")
-	DataResult<List<JobPostingDto>> findAllByIsActive() {
+	DataResult<List<JobPostingGetDto>> findAllByIsActive() {
 		return this.jobPostingService.findAllByIsActive();
 
 	}
 
 	@GetMapping("/findAllByIsActiveOrderByCreatedDateDesc")
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateDesc() {
+	DataResult<List<JobPostingGetDto>> findAllByIsActiveOrderByCreatedDateDesc() {
 		return this.jobPostingService.findAllByIsActiveOrderByCreatedDateDesc();
 	}
 	
 	@GetMapping("/findAllByIsActiveOrderByCreatedDateAsc")
-	DataResult<List<JobPostingDto>> findAllByIsActiveOrderByCreatedDateAsc(){
+	DataResult<List<JobPostingGetDto>> findAllByIsActiveOrderByCreatedDateAsc(){
 	return this.jobPostingService.findAllByIsActiveOrderByCreatedDateAsc();
 	}
 	
 	@GetMapping("/findAllByIsActiveAndEmployer_CompanyName")
-	DataResult<List<JobPostingDto>> findAllByIsActiveAndEmployer_CompanyName(String companyName) {
+	DataResult<List<JobPostingGetDto>> findAllByIsActiveAndEmployer_CompanyName(String companyName) {
 		return this.jobPostingService.findAllByIsActiveAndEmployer_CompanyName( companyName);
 	}
 	

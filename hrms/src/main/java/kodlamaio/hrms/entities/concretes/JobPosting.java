@@ -38,6 +38,10 @@ public class JobPosting {
 	private JobTitle jobTitle;
 	
 	@ManyToOne()
+	@JoinColumn(name="job_type_id",referencedColumnName = "id")
+	private JobType jobType;
+	
+	@ManyToOne()
 	@JoinColumn(name="city_id",referencedColumnName = "id")
 	private City city;
 	
@@ -64,5 +68,10 @@ public class JobPosting {
 	
 	@Column(name = "job_posting_name")
 	private String jobPostingName;
+	
+	@Column(name = "is_remote")
+	private boolean isRemote;
+	
+	
 	
 }

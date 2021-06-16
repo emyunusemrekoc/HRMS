@@ -17,6 +17,7 @@ public class JobPostingAddDto {
 	private int id;
 	private int employerId;
 	private int jobTitleId;
+	private int jobTypeId;
 	private int cityId;
 	private String jobDescription;
 	private int minSalary;
@@ -26,6 +27,7 @@ public class JobPostingAddDto {
 	@JsonIgnore
 	private LocalDate createdDate;
 	private boolean isActive;
+	private boolean isRemote;
 	private String jobPostingName;
 	
 

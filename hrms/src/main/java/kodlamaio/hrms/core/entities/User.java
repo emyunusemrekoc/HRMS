@@ -9,14 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import kodlamaio.hrms.entities.concretes.UserPhoto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,12 +43,15 @@ public class User {
 	private String password;
 	
 	@Transient
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private String passwordRepeat;
 	
 	@JsonIgnore
 	@Column(name="created_date")
 	private LocalDateTime createdDate = LocalDateTime.now();
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "user")
+	private UserPhoto userPhoto;
 	
 	
 	}

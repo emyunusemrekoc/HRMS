@@ -32,6 +32,6 @@ public class Employee extends User{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "employee")
-	private List<ConfirmByEmployee> confirmByEmployees;
+	private List<EmployerConfirmByEmployee> employerConfirmByEmployees;
 
 }

@@ -21,12 +21,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name="confirm_by_employees")
+@Table(name="job_posting_confirm_by_employees")
 @AllArgsConstructor
 @NoArgsConstructor
-
 @EqualsAndHashCode(callSuper=false)
-public class ConfirmByEmployee {
+public class JobPostingConfirmByEmployee {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,15 +36,16 @@ public class ConfirmByEmployee {
 	private boolean isConfirmed;
 	
 	@OneToOne()
-	@JoinColumn(name="employers_id",referencedColumnName = "id")
-	private Employer employer;
+	@JoinColumn(name="job_posting_id",referencedColumnName = "id")
+	private JobPosting jobPosting;
 	
 	@ManyToOne()
-	@JoinColumn(name="employees_id",referencedColumnName = "id")
+	@JoinColumn(name="employee_id",referencedColumnName = "id")
 	private Employee employee;
 	
 	@JsonIgnore
 	@Column(name="confirmed_date")
 	private LocalDateTime confirmedDate;
+
 
 }

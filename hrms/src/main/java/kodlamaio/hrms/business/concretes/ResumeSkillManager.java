@@ -13,7 +13,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.ResumeSkillDao;
 import kodlamaio.hrms.entities.concretes.ResumeSkill;
-import kodlamaio.hrms.entities.dtos.JobPostingDto;
+import kodlamaio.hrms.entities.dtos.JobPostingGetDto;
 import kodlamaio.hrms.entities.dtos.ResumeSkillDto;
 
 @Service
