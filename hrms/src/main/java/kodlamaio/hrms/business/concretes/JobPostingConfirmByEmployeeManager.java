@@ -49,9 +49,9 @@ public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEm
 		jobPostingConfirmByEmployeeDao.save(confirmByEmployee);
 		
 		
-		JobPosting pasivePosting = jobPostingDao.findById(jobPostingId);
-		pasivePosting.setActive(isConfirmed);
-		jobPostingDao.save(pasivePosting);
+		JobPosting passivePosting = jobPostingDao.findById(jobPostingId);
+		passivePosting.setActive(isConfirmed);
+		jobPostingDao.save(passivePosting);
 			
 	
 		

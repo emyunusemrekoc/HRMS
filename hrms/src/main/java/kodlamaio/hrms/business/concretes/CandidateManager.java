@@ -61,7 +61,7 @@ public class CandidateManager implements CandidateService {
 			return new ErrorResult("Boş alan bırakmayınız");
 		}
 
-		 if (!regexService.isPasswordFormat(candidate.getPassword())) {
+		else if (!regexService.isPasswordFormat(candidate.getPassword())) {
 			return new ErrorResult(
 					"Şifreniz en az 8 karakterden oluşmalıdır.En az bir büyük harf,bir küçük harf,bir rakam ve özel karakter içermelidir.");
 		}
@@ -78,7 +78,7 @@ public class CandidateManager implements CandidateService {
 			return new ErrorResult("Kimlik bilgileriniz e-devlet doğrulamasından geçemedi");
 		}
 
-		else if (candidateDao.findByEmailEquals(candidate.getEmail()) != null) {
+		else if (candidateDao.findByEmailEquals(candidate.getEmail()) != null ) {
 			return new ErrorResult("Bu mail adresi daha önceden kayıtlı");
 		}
 

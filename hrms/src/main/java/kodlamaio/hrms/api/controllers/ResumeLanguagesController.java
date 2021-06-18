@@ -15,7 +15,6 @@ import kodlamaio.hrms.business.abstracts.ResumeLanguageService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.dtos.ResumeLanguageDto;
-import kodlamaio.hrms.entities.dtos.ResumeSkillDto;
 
 @RestController
 @RequestMapping("/api/resumeLanguages")
