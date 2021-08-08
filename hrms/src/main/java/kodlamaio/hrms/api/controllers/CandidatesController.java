@@ -38,5 +38,11 @@ public class CandidatesController {
 		return candidateService.add(candidate);
 	}
 	
+	@GetMapping("/findById")
+	DataResult<Candidate> findById(int candidateId){
+		return candidateService.findById(candidateId);
+	}
+	
+	
 		
 }

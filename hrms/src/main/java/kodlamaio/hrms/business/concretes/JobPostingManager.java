@@ -50,7 +50,7 @@ public class JobPostingManager implements JobPostingService {
 		jobPostingDao.save( jobPosting);
 		jobPostingConfirmByEmployeeService.confirmTableSetter(jobPosting);
 		
-		return new SuccessResult("İş ilanı başarılı bir şekilde oluşturuldu");
+		return new SuccessResult("İş ilanı başarılı bir şekilde oluşturuldu, onay için hrms çalışanlarına gönderildi.");
 	}
 
 	@Override
@@ -129,6 +129,14 @@ public class JobPostingManager implements JobPostingService {
 		else {
 			return new ErrorResult("Null değer girdiniz");
 		}
+	}
+
+
+
+	@Override
+	public DataResult<JobPosting> findById(int jobPostingId) {
+		
+		return new SuccessDataResult<JobPosting>(jobPostingDao.findById(jobPostingId));
 	}
 
 

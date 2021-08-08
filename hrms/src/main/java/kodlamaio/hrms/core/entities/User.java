@@ -15,7 +15,6 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import kodlamaio.hrms.entities.concretes.UserPhoto;
 import lombok.AllArgsConstructor;
@@ -50,7 +49,7 @@ public class User {
 	@Column(name="created_date")
 	private LocalDateTime createdDate = LocalDateTime.now();
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToOne(mappedBy = "user")
 	private UserPhoto userPhoto;
 	

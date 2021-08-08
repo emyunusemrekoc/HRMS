@@ -12,13 +12,13 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
-import kodlamaio.hrms.dataAccess.abstracts.EmployerConfirmByEmployeeDao;
 import kodlamaio.hrms.dataAccess.abstracts.EmployeeDao;
-import kodlamaio.hrms.entities.concretes.EmployerConfirmByEmployee;
+import kodlamaio.hrms.dataAccess.abstracts.EmployerConfirmByEmployeeDao;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.concretes.EmployerConfirmByEmployee;
+import kodlamaio.hrms.entities.dtos.CandidateSkillDto;
 import kodlamaio.hrms.entities.dtos.EmployerConfirmByEmployeeGetDto;
-import kodlamaio.hrms.entities.dtos.JobPostingGetDto;
 @Service
 public class EmployerConfirmByEmployeeManager implements EmployerConfirmByEmployeeService {
 
@@ -46,7 +46,7 @@ public class EmployerConfirmByEmployeeManager implements EmployerConfirmByEmploy
 			this.employerConfirmByEmployeeDao.save(confirmByEmployee);
 			
 		
-		return new SuccessResult("İşveren başarılı bir şekilde onaylandı");
+		return new SuccessResult("İşveren onaylaması düzenlendi");
 		
 	}
 
@@ -70,6 +70,7 @@ public class EmployerConfirmByEmployeeManager implements EmployerConfirmByEmploy
 		confirmByEmployee.setEmployer(employer);
 		confirmByEmployee.setConfirmed(false);
 		this.employerConfirmByEmployeeDao.save(confirmByEmployee);
+		
 	}
 
 	

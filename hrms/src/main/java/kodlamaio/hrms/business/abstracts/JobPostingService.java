@@ -19,6 +19,7 @@ public interface JobPostingService {
 	DataResult<List<JobPostingGetDto>> findAllByIsActiveOrderByCreatedDateAsc();
 	DataResult<List<JobPostingGetDto>>  findAllByIsActiveAndEmployer_CompanyName(String employerName);
 	DataResult<List<JobPosting>> findAll();
+	DataResult <JobPosting> findById(int jobPostingId);
 	
 
 }

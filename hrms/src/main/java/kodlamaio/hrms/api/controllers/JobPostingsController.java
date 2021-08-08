@@ -76,5 +76,10 @@ public class JobPostingsController {
 		return this.jobPostingService.findAll();
 		
 	}
+	
+	@GetMapping("/findById")
+	DataResult <JobPosting> findById(int jobPostingId){
+		return jobPostingService.findById(jobPostingId);
+	}
 
 }

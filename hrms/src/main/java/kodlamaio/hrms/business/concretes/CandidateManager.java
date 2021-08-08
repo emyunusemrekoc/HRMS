@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.CandidateCoverLetterService;
 import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.business.abstracts.UserPhotoService;
 import kodlamaio.hrms.business.verifications.abstracts.VerificationCodeService;
@@ -28,12 +29,14 @@ public class CandidateManager implements CandidateService {
 	private RegexService regexService;
 	private FakeSendEmailService fakeSendEmailService;
 	private UserPhotoService userPhotoService;
+	private CandidateCoverLetterService candidateCoverLetterService;
 
 
 	@Autowired
 	public CandidateManager(FakeMernisService fakeMernisService, CandidateDao candidateDao,
 			VerificationCodeService verificationCodeService, RegexService regexService,
-			FakeSendEmailService fakeSendEmailService,UserPhotoService userPhotoService) {
+			FakeSendEmailService fakeSendEmailService,UserPhotoService userPhotoService,
+			CandidateCoverLetterService candidateCoverLetterService) {
 		super();
 		this.fakeMernisService = fakeMernisService;
 		this.candidateDao = candidateDao;
@@ -41,6 +44,7 @@ public class CandidateManager implements CandidateService {
 		this.regexService = regexService;
 		this.fakeSendEmailService = fakeSendEmailService;
 		this.userPhotoService = userPhotoService;
+		this.candidateCoverLetterService = candidateCoverLetterService;
 	}
 
 
@@ -92,12 +96,20 @@ public class CandidateManager implements CandidateService {
 			this.verificationCodeService.generateVerificationCode(candidate);
 			this.fakeSendEmailService.SendEmail(candidate.getEmail());
 			this.userPhotoService.photoTableSetter(candidate);
+			this.candidateCoverLetterService.coverLetterTableSetter(candidate);
 			
 			
 			return new SuccessResult("Kullanıcı sisteme kaydedildi.Fakat doğrulama yapılmadı. " + candidate.getEmail()
 								+ " Adresine doğrulama kodu gönderildi");
 			}
 		}
+
+
+	@Override
+	public DataResult<Candidate> findById(int candidateId) {
+	
+		return new SuccessDataResult<Candidate>(candidateDao.findById(candidateId),"İş arayan getirildi");
+	}
 		
 	}
 

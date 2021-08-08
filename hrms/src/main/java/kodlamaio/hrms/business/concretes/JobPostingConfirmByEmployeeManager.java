@@ -18,6 +18,7 @@ import kodlamaio.hrms.dataAccess.abstracts.JobPostingDao;
 import kodlamaio.hrms.entities.concretes.Employee;
 import kodlamaio.hrms.entities.concretes.JobPosting;
 import kodlamaio.hrms.entities.concretes.JobPostingConfirmByEmployee;
+import kodlamaio.hrms.entities.dtos.CandidateSkillDto;
 import kodlamaio.hrms.entities.dtos.JobPostingConfirmByEmployeeGetDto;
 @Service
 public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEmployeeService{
@@ -54,9 +55,11 @@ public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEm
 		jobPostingDao.save(passivePosting);
 			
 	
-		
+	if(isConfirmed) {	
 	
-	return new SuccessResult("İşveren başarılı bir şekilde onaylandı");
+	return new SuccessResult("İş ilanı başarılı bir şekilde onaylandı");
+	}
+	return new SuccessResult("iş ilanının onayı kaldırıldı");
 	}
 	
 
@@ -72,6 +75,7 @@ public class JobPostingConfirmByEmployeeManager implements JobPostingConfirmByEm
 		confirmByEmployee.setJobPosting(jobPosting);
 		confirmByEmployee.setConfirmed(false);
 		jobPostingConfirmByEmployeeDao.save(confirmByEmployee);
+		
 	}
 	
 }
